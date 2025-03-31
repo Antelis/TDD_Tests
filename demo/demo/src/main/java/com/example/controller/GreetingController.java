@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
+    private static final String template = "Hello, %s!";
+
     @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(required = false, defaultValue = "World") String name) {
-        return new Greeting("Hello, " + name + "!");
+    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return new Greeting(String.format(template, name));
     }
 }
